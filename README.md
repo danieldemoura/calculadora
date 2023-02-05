@@ -22,8 +22,8 @@ Projeto desenvolvido no desafio do #boraCodar da Rocketseat, o objetivo era dese
       <th>✅ FINALIZADO</th>
     </tr>
     <tr>
-      <td>05/01/2023</td>
-      <td>06/01/2023</td>
+      <td>05/02/2023</td>
+      <td>06/02/2023</td>
     </tr>
   </table>
 </div>
