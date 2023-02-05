@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Rubik&display=swap">
+    <link rel="stylesheet" href="./style.css">
+
+    <script src="https://unpkg.com/phosphor-icons"></script>
+    <title>#boraCodar Calculadora</title>
+</head>
+<body>
+    <main id="app">
+        <section id="calculator">
+            <section id="calculation">
+                <section id="calc-numbers">1 + 1</section>
+
+                <section id="contain-result">
+                    <span id="result-symbol"> = </span>
+                    <span id="result">2</span>
+                </section>
+            </section>
+            <section id="keyboard">
+                <button>CE</button>
+                <button>C</button>
+                <button>
+                    <i class="ph-percent"></i>
+                </button>
+                <button class="col-right operator">
+                    <i class="ph-divide"></i>
+                </button>
+                <button class="number" value="7">7</button>
+                <button class="number" value="8">8</button>
+                <button class="number" value="9">9</button>
+                <button class="col-right operator">
+                    <i class="ph-x"></i>
+                </button>
+                <button class="number" value="4">4</button>
+                <button class="number" value="5">5</button>
+                <button class="number" value="6">6</button>
+                <button class="col-right operator">
+                    <i class="ph-minus"></i>
+                </button>
+                <button class="number" value="1">1</button>
+                <button class="number" value="2">2</button>
+                <button class="number" value="3">3</button>
+                <button class="col-right operator" id="sum">
+                    <i class="ph-plus"></i>
+                </button>
+                <button>
+                    <i class="ph-plus-minus"></i>
+                </button>
+                <button class="number" value="0">0</button>
+                <button>,</button>
+                <button class="col-right" id="equals">
+                    <i class="ph-equals"></i>
+                </button>
+            </section>
+        </section>
+    </main>
+</body>
+</html>
