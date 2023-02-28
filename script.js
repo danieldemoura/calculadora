@@ -11,16 +11,48 @@ const elements = {
 }
 
 const calculator = {
-    savedNumber: "",
+    numbers: "",
     arrayOfNumber: [],
     operatorExecute: false,
 
-    displayOnScreen(value) {
+    displayOnScreenValue(value) {
         elements.screen.textContent += value
     },
 
     displayOnScreenResult(result) {
-        elements.screen.textContent = result
+        elements.screen.textContent = result        
+    },
+
+    displayCalculatedNumbers(number1, number2) {
+        elements.calcNumbers.textContent = `${number1}+${number2}`
+    },
+
+    saveNumbersToArray() {
+        const operatorNotWasExecuted = this.operatorExecute === false
+
+        if(operatorNotWasExecuted) {
+            this.arrayOfNumber[0] = Number(this.numbers)
+            console.log(this.arrayOfNumber)
+
+        } else {
+            this.arrayOfNumber[1] = Number(this.numbers)
+            console.log(this.arrayOfNumber)
+            
+        }
+    },
+
+    getNumber(number) {
+        this.numbers += number
+        this.saveNumbersToArray()
+        this.displayOnScreenValue(number)
+    },
+
+    deleteCapturedNumbers() {
+        this.numbers = ""
+    },
+
+    deleteElementOfArray(index, elements) {
+        this.arrayOfNumber.splice(index, elements)
     },
 
     clearScreen() {
@@ -28,26 +60,9 @@ const calculator = {
         elements.screen.textContent = ""
     },
 
-    displayCalculatedNumbers(number1, number2) {
-        elements.calcNumbers.textContent = `${number1}+${number2}`
-    },
-
-    getNumber(number) {
-        this.arrayOfNumber.push(Number(number))
-        this.displayOnScreen(number)
-    },
-
-    deleteSavedNumber() {
-        this.savedNumber = ""
-    },
-
-    deleteElementOfArray(index, elements) {
-        this.arrayOfNumber.splice(index, elements)
-    },
-    
     clearEntry() {
         this.deleteElementOfArray(0, 2)
-        this.deleteSavedNumber()
+        this.deleteCapturedNumbers()
         this.clearScreen()
         this.operatorExecute = false
     },
@@ -63,14 +78,34 @@ const calculator = {
             this.displayCalculatedNumbers(this.arrayOfNumber[0], this.arrayOfNumber[1])
             this.result()
             this.displayOnScreenResult(this.arrayOfNumber[0])
-            this.deleteElementOfArray(1, 1)
 
         } else {
             this.operatorExecute = true
         }
 
-        this.displayOnScreen("+")
+        this.displayOnScreenValue("+")
+        console.log(calculator.arrayOfNumber)
+
+        this.deleteCapturedNumbers()
     },
+
+    equals() {
+        const correctMathExpression = /\d+\+\d+$/.test(elements.screen.textContent)
+
+        if(correctMathExpression) {
+            this.displayCalculatedNumbers(this.arrayOfNumber[0], this.arrayOfNumber[1])
+
+            this.result.bind(this)()
+            this.deleteCapturedNumbers()
+        }
+        
+        this.displayOnScreenResult(this.arrayOfNumber[0])
+
+        this.operatorExecute = false
+        if(this.operatorExecute == false) {
+            this.deleteElementOfArray(1, 1)
+        }
+    }
 }
 
 
@@ -82,13 +117,7 @@ const App = {
 
         elements.btnSum.addEventListener("click", calculator.sum.bind(calculator))
         elements.btnCE.addEventListener("click", calculator.clearEntry.bind(calculator))
-
-        elements.btnEquals.addEventListener("click", () => {
-            calculator.result.bind(calculator)()
-            calculator.operatorExecute = false
-            calculator.deleteElementOfArray(1, 1)
-            calculator.displayOnScreenResult(calculator.arrayOfNumber[0])
-        })
+        elements.btnEquals.addEventListener("click", calculator.equals.bind(calculator))
     },
 }
 
