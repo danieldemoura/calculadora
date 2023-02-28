@@ -4,12 +4,13 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
+    
+    <link rel="icon" href="./icons/icon-48x48.png">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Rubik&display=swap">
     <link rel="stylesheet" href="./style.css">
-
+    
     <script src="https://unpkg.com/phosphor-icons"></script>
     <title>#boraCodar Calculadora</title>
 </head>
@@ -17,32 +18,32 @@
     <main id="app">
         <section id="calculator">
             <section id="calculation">
-                <section id="calc-numbers">1 + 1</section>
+                <section id="calc-numbers"></section>
 
                 <section id="contain-result">
                     <span id="result-symbol"> = </span>
-                    <span id="result">2</span>
+                    <span id="result"></span>
                 </section>
             </section>
             <section id="keyboard">
-                <button>CE</button>
-                <button>C</button>
+                <button id="clear-entry">CE</button>
+                <button id="clear">C</button>
                 <button>
                     <i class="ph-percent"></i>
                 </button>
-                <button class="col-right operator">
+                <button class="col-right operator" id="divide">
                     <i class="ph-divide"></i>
                 </button>
                 <button class="number" value="7">7</button>
                 <button class="number" value="8">8</button>
                 <button class="number" value="9">9</button>
-                <button class="col-right operator">
+                <button class="col-right operator" id="multiple">
                     <i class="ph-x"></i>
                 </button>
                 <button class="number" value="4">4</button>
                 <button class="number" value="5">5</button>
                 <button class="number" value="6">6</button>
-                <button class="col-right operator">
+                <button class="col-right operator" id="minus">
                     <i class="ph-minus"></i>
                 </button>
                 <button class="number" value="1">1</button>
@@ -62,5 +63,7 @@
             </section>
         </section>
     </main>
+
+    <script src="script.js"></script>
 </body>
 </html>

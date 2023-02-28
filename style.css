@@ -96,6 +96,10 @@ button, button i {
     cursor: pointer;
 }
 
+button:active {
+    transform: translateY(3px) rotateX(-10deg);
+}
+
 #keyboard button:first-child {
     color: #975DFA;
 }
