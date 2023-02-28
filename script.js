@@ -90,7 +90,7 @@ const calculator = {
     },
 
     equals() {
-        const correctMathExpression = /\d+\+\d+$/.test(elements.screen.textContent)
+    const correctMathExpression = /^\d+[\/\*\-\+\%]\d+$/.test(elements.screen.textContent)
 
         if(correctMathExpression) {
             this.displayCalculatedNumbers(this.arrayOfNumber[0], this.arrayOfNumber[1])
