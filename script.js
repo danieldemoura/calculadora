@@ -14,6 +14,8 @@ const calculator = {
     numbers: "",
     arrayOfNumber: [],
     operatorExecute: false,
+    currentOperation: "",
+
 
     displayOnScreenValue(value) {
         elements.screen.textContent += value
@@ -23,8 +25,8 @@ const calculator = {
         elements.screen.textContent = result        
     },
 
-    displayCalculatedNumbers(number1, number2) {
-        elements.calcNumbers.textContent = `${number1}+${number2}`
+    displayCalculatedNumbers(number1, operator, number2) {
+        elements.calcNumbers.textContent = `${number1}${operator}${number2}`
     },
 
     saveNumbersToArray() {
@@ -65,18 +67,33 @@ const calculator = {
         this.deleteCapturedNumbers()
         this.clearScreen()
         this.operatorExecute = false
+        this.currentOperation = ""
     },
 
-    result() {
-        const sum = this.arrayOfNumber.reduce((accumulator, currentValue) => accumulator + currentValue, 0)
-        this.arrayOfNumber[0] = sum
+    result(operation) {
+
+        switch(operation) {
+
+            case "+":
+                const sum = this.arrayOfNumber.reduce((accumulator, currentValue) => accumulator + currentValue, 0)
+                this.arrayOfNumber[0] = sum
+                this.currentOperation = "+"
+                break   
+            case "-":
+                const minus = this.arrayOfNumber.reduce((accumulator, currentValue) => accumulator - currentValue)
+                this.arrayOfNumber[0] = minus
+                this.currentOperation = "-"
+                break     
+        }
+
+
     },
     
     sum() {
         
         if(this.operatorExecute === true) {
-            this.displayCalculatedNumbers(this.arrayOfNumber[0], this.arrayOfNumber[1])
-            this.result()
+            this.displayCalculatedNumbers(this.arrayOfNumber[0], "+", this.arrayOfNumber[1])
+            this.result("+")
             this.displayOnScreenResult(this.arrayOfNumber[0])
 
         } else {
@@ -89,13 +106,30 @@ const calculator = {
         this.deleteCapturedNumbers()
     },
 
+    minus() {
+
+        if(this.operatorExecute === true) {
+            this.displayCalculatedNumbers(this.arrayOfNumber[0], "-", this.arrayOfNumber[1])
+            this.result("-")
+            this.displayOnScreenResult(this.arrayOfNumber[0])
+
+        } else {
+            this.operatorExecute = true
+        }
+
+        this.displayOnScreenValue("-")
+        console.log(calculator.arrayOfNumber)
+
+        this.deleteCapturedNumbers()
+    },
+
     equals() {
     const correctMathExpression = /^\d+[\/\*\-\+\%]\d+$/.test(elements.screen.textContent)
 
         if(correctMathExpression) {
-            this.displayCalculatedNumbers(this.arrayOfNumber[0], this.arrayOfNumber[1])
+            this.displayCalculatedNumbers(this.arrayOfNumber[0], this.currentOperation, this.arrayOfNumber[1])
 
-            this.result.bind(this)()
+            this.result.bind(calculator, this.currentOperation)()
             this.deleteCapturedNumbers()
         }
         
@@ -116,6 +150,7 @@ const App = {
         })
 
         elements.btnSum.addEventListener("click", calculator.sum.bind(calculator))
+        elements.btnMinus.addEventListener("click", calculator.minus.bind(calculator))
         elements.btnCE.addEventListener("click", calculator.clearEntry.bind(calculator))
         elements.btnEquals.addEventListener("click", calculator.equals.bind(calculator))
     },
